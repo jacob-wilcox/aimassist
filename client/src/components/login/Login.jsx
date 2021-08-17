@@ -29,7 +29,7 @@ function Login() {
                         <div className="login-wrapper">
                             <div className="form-group">
                                 <input className="form-control" type="text" id="name" required minlength="1" maxlength="12" size="10" />
-                                <label for="name">Login:</label>
+                                <label for="name">Login:</label>b
                             </div>
                             <div className="form-group">
                                 <input className="form-control" type="password"  id="myInput" required minlength="1" maxlength="20" size="10" />
