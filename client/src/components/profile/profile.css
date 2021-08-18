@@ -1,0 +1,127 @@
+.login-form {
+    background: #10101F;
+    box-shadow: 0px 0px #000000;
+}
+.login-form input {
+    width: 100%;
+    height: 46px;
+    background: #040414;
+    border: 1px solid #93B2FF;  
+}
+.login-form input:focus {
+  outline:none;
+  width: 100%;
+  height: 46px;
+  border: 1px solid #3772FF;
+  box-sizing: border-box;
+  border-radius: 10px;
+  outline: 0;
+  outline-offset: 0;
+}
+.login-form input[type=text] {
+  padding-left: 16px;
+  color: white;
+}
+.login-form input[type=password] {
+  padding-left: 16px;
+  color: white;
+}
+/* .input-icons {
+  position: absolute;
+  margin: -35px;
+  margin-left: 240px;
+} */
+.form-group>label {
+    bottom: 34px;
+    left: 15px;
+    position: relative;
+    padding: 0px 5px 0px 5px;
+    background: none;
+    font-size: 1.1em;
+    transition: 0.2s;
+    pointer-events: none;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 15px;
+    letter-spacing: 0.4px;
+    color: #FFFFFF;
+    text-shadow:
+   -1px -1px 0 #040414,  
+    1px -1px 0 #040414,
+    -1px 1px 0 #040414,
+     1px 1px 0 #040414;
+  }
+  .form-control:focus~label {
+    bottom: 55px;
+    color: #3772FF;
+  }
+  /*nothing to test on, but kinda work*/
+  .form-control:valid~label {
+    bottom: 55px;
+    color: #45B26B;
+  }
+.login-btn {
+    margin-bottom: 4px;
+    padding: 6px 16px 6px 16px;
+    background-color: #3772FF;
+    border: 1px solid #3772FF;
+    border-radius: 5px;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+    letter-spacing: 1.25px;
+    color: #FFFFFF;
+}
+.login-btn:hover {
+    background-color: #6A96FF;
+}
+.login-btn:active {
+    background-color: #8EAFFF;
+    border: 1px solid #8EAFFF;
+}
+.login-btn:focus {
+    background-color: #316EFF;
+    border: 1px solid #004BFF;  
+}
+
+
+.dashboard-2 {
+  display: flex;
+  flex-direction: row;
+}
+
+.content-wrap-2 {
+  display: flex;
+  flex-direction: row;
+}
+
+
+table {
+
+}
+tr {
+
+}
+
+th {
+  color: #93B2FF;
+ 
+  padding-bottom: 20px;
+  
+}
+
+td {
+  padding-bottom: 20px;
+  padding: 0 25px;
+
+ 
+}
+
+td a {
+  color: red;
+
+  text-decoration: none;
+  
+}

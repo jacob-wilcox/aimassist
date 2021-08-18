@@ -1,3 +1,6 @@
+import { Link, useHistory } from 'react-router-dom';
+
+
 import '../navigation/stars.css';
 import '../navigation/nav.css';
 // <link rel="stylesheet" href="../../components/navigation/nav.css">
@@ -9,7 +12,7 @@ function Sign() {
     <div className="Login">
     <body>
         <header class="header">
-          <a href="" class="logo">Blimp</a>
+          <a href="" class="logo">Aim Assist</a>
         </header>
         <div>
             <div class="littlestars"></div>
@@ -19,7 +22,7 @@ function Sign() {
             <div class="login-form">
                 <div class="title-wrapper">
                 <div class="login-form-title">Sign Up</div>
-                <div class="login-form-right"><a href="login.html">Log In</a></div>
+                <div class="login-form-right"><Link to="/">Login</Link></div>
                 </div>
                 <form>
                     <div class="login-wrapper">
