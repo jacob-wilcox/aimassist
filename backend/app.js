@@ -26,6 +26,24 @@ app.get('/all_bullets', (req, res) => {
     })
 })
 
+// get user profile if authenticates WARNING: NOT SECURE OR CORRECT WAY TO AUTHENTICATE USER
+app.get('/login/:email/:password', (req, res) => {
+  let email = req.params.email
+  let password = req.params.password
+  knex
+    .select('*')
+    .from('users')
+    .where('email', email)
+    .where('password', password)
+    .then((data) => {
+      if(data.length === 0){
+        return res.status(404).send('This user/password is incorrect')
+      } else {
+        res.status(200).send(data)
+      }
+    })
+})
+
 // get users bullets 
 app.get('/bullets/:user_id', (req, res) => {
   let user = req.params.user_id
@@ -123,7 +141,7 @@ app.put('/edit/bullet/:bullet_id', (req, res) =>  {
       .then(() => {
         return res.status(200).send(`You updated ${bullet} with data`)
       })
-      .catch((err) => res.send(err))
+      .catch((err) => res.status(400).send(err))
   }
 });
 
@@ -142,14 +160,14 @@ app.put('/edit/user/:user_id', (req, res) =>  {
     .then(() => {
     return res.status(200).send(`You updated ${user} with data`)
     })
-    .catch((err) => res.send(err))
+    .catch((err) => res.status(400).send(err))
   }
 });
 
 // delete user
 app.delete('/delete-user/:user_id', (req, res) => {
   let user = req.params.user_id
-  if (isNaN(bullet)) {
+  if (isNaN(user)) {
     res.status(400).send('400: Invalid user id')
   } else {
     knex('users')
