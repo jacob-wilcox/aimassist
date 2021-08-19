@@ -34,13 +34,14 @@ const Dashboard = (props) => {
     //fetch call for all bullets && be able to change user id to collect users bullets
     // a function that can post a new bullet
    
+    //get subordinates for current user and set cur user subs state 
     useEffect(()=> {
         fetch(`http://localhost:3001/my-subordinates/${curUser.user_id}`)
             .then(res => res.json())
             .then(jsonData => setCurUserSubs(jsonData))
     }, [curUser])
 
-
+    //get list of bullets thats currently shown
     useEffect(() => {
         fetch(`http://localhost:3001/bullets/${userOfShownBullets.user_id}`)
         .then(res => res.json())
@@ -55,9 +56,6 @@ const Dashboard = (props) => {
                 <div className = 'body-title'>
                     Tracker
                 </div>
-                <div className = 'body-search'>
-                        <input type="text" id="body-search" placeholder="Search"/>
-                </div>
             </div>
 
             <div className = 'content-wrap'>
@@ -71,10 +69,6 @@ const Dashboard = (props) => {
                             </div>
                     </div>
                     <div className = 'content-title-right'>
-                            <select id="years" name="years">
-                                <option value="2021">Select year 2021</option>
-                                <option value="2020">Select year 2020</option>
-                            </select>
                             <button  className = 'add-bullet' onClick={() => toggleShow(!show)}>Add Bullet</button>
                             {show &&  
                                 <div  className = 'form-form'>
