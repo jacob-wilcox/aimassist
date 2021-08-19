@@ -6,6 +6,11 @@ const bodyParser = require("body-parser");
 
 app.use(bodyParser.json());
 
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  next();
+});
+
 //get all users
 app.get('/all_users', (req, res) => {
   knex

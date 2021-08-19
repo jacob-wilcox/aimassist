@@ -1,8 +1,9 @@
-import { Link, useHistory } from 'react-router-dom';
-import React from "react";
+import { Link, useHistory} from 'react-router-dom';
+import React, {useEffect, useState}  from "react";
 
 import './Dashboard.css';
 import Bar from '../bar/bar.jsx';
+import Bullets from './bullets';
 
 // function myFunction() {
 //     var x = document.getElementById("myDIV");
@@ -13,12 +14,42 @@ import Bar from '../bar/bar.jsx';
 //     }
 //   }
 
-const Dashboard = () => { 
-    const [show, toggleShow] = React.useState(true);
+//user profile is passed as a prop
+const Dashboard = (props) => { 
+    console.log('this is props', props)
+    const [show, toggleShow] = useState(true);
+    const [curUser, setCurUser] = useState({
+        user_id: 1,
+        first_name: "Joe",
+        last_name: "Schmo",
+        email: "1234@4567.com",
+        password: "password!",
+        my_super: null,
+        is_super: true
+    })
+    const [curUserSubs, setCurUserSubs] = useState([])
+    const [userOfShownBullets, setUserOfShownBullets] = useState(curUser)
+    const [shownBullets, setShownBullets] = useState([])
+    //fetch call for all sub
+    //fetch call for all bullets && be able to change user id to collect users bullets
+    // a function that can post a new bullet
+   
+    useEffect(()=> {
+        fetch(`http://localhost:3001/my-subordinates/${curUser.user_id}`)
+            .then(res => res.json())
+            .then(jsonData => setCurUserSubs(jsonData))
+    }, [curUser])
+
+
+    useEffect(() => {
+        fetch(`http://localhost:3001/bullets/${userOfShownBullets.user_id}`)
+        .then(res => res.json())
+        .then(jsonData => setShownBullets(jsonData))
+    }, [userOfShownBullets, curUser])
 
   return (
    <div className = 'dashboard'>
-       <Bar/>
+       <Bar props={curUserSubs}/>
     <div className = "flex-holder">
             <div className = 'body-wrap'>
                 <div className = 'body-title'>
@@ -33,10 +64,10 @@ const Dashboard = () => {
                 <div className = 'content-holder'>
                     <div className="content-title-left">
                             <div className = 'content-title-main'>
-                                My Bullets
+                                {`${userOfShownBullets.first_name} ${userOfShownBullets.last_name}'s bullets`}
                             </div>
                             <div className = 'content-title-sub'>
-                                44324 List Items
+                                {shownBullets.length}
                             </div>
                     </div>
                     <div className = 'content-title-right'>
@@ -81,70 +112,20 @@ const Dashboard = () => {
 
 
                 <div className = 'content'>
-                    
-                        
-
-                    
                     <table >
                         <tr>
                             <th className = 'thDate'>Dates</th>
                             <th>Action</th>
                             <th>Impact</th>
                             <th>Results</th>
-                            <th>Functions</th>
+                            <th>Feedback</th>
                         </tr>
-                        <tr className="task" data-id="1">
-                            <td>May 30, 2021</td>
-                            <td>Lorem Ipsum is simply dummy text of the printing and typesetting industry.  Lorem Ipsum is simply dummy text of the printing and typesetting industry.  </td>
-                            <td>Lorem Ipsum is simply dummy text of the printing and typesetting industry.  Lorem Ipsum is simply dummy text of the printing and typesetting industry.  </td>
-                            <td>We fucked!</td>
-                            <td><a href="#">Delete</a></td>
-                        </tr>
-                        <tr className="task" data-id="2">
-                            <td>Apr 18, 2021</td>
-                            <td>Lorem Ipsum is simply dummy text of the printing and typesetting industry.  Lorem Ipsum is simply dummy text of the printing and typesetting industry.  </td>
-                            <td>Lorem Ipsum is simply dummy text of the printing and typesetting industry.  Lorem Ipsum is simply dummy text of the printing and typesetting industry.  </td>
-                            <td>We fucked!</td>
-                            <td><a href="#">Delete</a></td>
-                        </tr>
-                        <tr className="task" data-id="3">
-                            <td>Jun 4, 2020</td>
-                            <td>Lorem Ipsum is simply dummy text of the printing and typesetting industry.  Lorem Ipsum is simply dummy text of the printing and typesetting industry.  </td>
-                            <td>Lorem Ipsum is simply dummy text of the printing and typesetting industry.  Lorem Ipsum is simply dummy text of the printing and typesetting industry.  </td>
-                            <td>We fucked!</td>
-                            <td><a href="#">Delete</a></td>
-                        </tr>
-                        <tr className="task" data-id="4">
-                            <td>Aug 21, 2021</td>
-                            <td>Lorem Ipsum is simply dummy text of the printing and typesetting industry.  Lorem Ipsum is simply dummy text of the printing and typesetting industry.  </td>
-                            <td>Lorem Ipsum is simply dummy text of the printing and typesetting industry.  Lorem Ipsum is simply dummy text of the printing and typesetting industry.  </td>
-                            <td>We fucked!</td>
-                            <td><a href="#">Delete</a></td>
-                        </tr>
+                        <Bullets props={shownBullets}/>
                     </table>
                 </div>  
             
             </div>   
     </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-       
    </div>
   );
 }

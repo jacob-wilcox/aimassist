@@ -24,7 +24,7 @@ function App() {
         <Route path="/Sign">
           <Sign />
         </Route>
-        <Route path="/dashboard">
+        <Route path="/dashboard/">
           <Dashboard />
         </Route>
         <Route path="/profile">
