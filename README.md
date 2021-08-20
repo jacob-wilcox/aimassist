@@ -24,8 +24,8 @@ Aim Assist is simple and user friendly. Login to be taken to your dashboard:
 ![Dashboard](https://github.com/jltackett2/aimassist/blob/bullet-form/images/Dashbard.png) 
 
 From your dashboard, you can see you previously submited bullets. You can also add new a new bullet by clicking on the add bullet button. This will open the add bullet form:
-![Add Bullet](https://github.com/jltackett2/aimassist/blob/bullet-form/images/Add%20Bullet.png | width=250)
-
+![Add Bullet](https://github.com/jltackett2/aimassist/blob/bullet-form/images/Add%20Bullet.png){width = "200"}
+<img src="https://github.com/jltackett2/aimassist/blob/bullet-form/images/Add%20Bullet.png" width="250px" height="315px">
 
 Once the form is filled out, simply click submit and you will see your new bullet added to your dashboard:
 ![Bullet Submitted](https://github.com/jltackett2/aimassist/blob/bullet-form/images/Bullet%20Added%20.png =250x250)
