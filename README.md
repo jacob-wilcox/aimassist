@@ -1,7 +1,5 @@
 # aimassist
 
-** DEVELOPMENT HAS SLOWED DOWN **
-
 #Description
 
 Aim Assist is a quick, simple way to keep track of EPR/OPR bullets for Airmen and Supervisors.
@@ -10,13 +8,25 @@ Aim Assist uses a postgreSQL database running on an express server, with a React
 
 On the left hand side bar, users can select to see their profile. Selecting the profile takes users to their information such as their ID/referal code, full name, email, password, and their role. If the user sees an error or needs to update their information, they can type in the specific field and click the button 'Submit update'. The only field you will not be able to change is your ID/referal code since this keeps track of you in the system specifically.
 
-For users in a Supervisor role, they also have the ability to see their Airmen's bullet page as well and check what/how many bullets are being created. Airmen's names will be listed below the tab 'My Tracker'. 
 
-#Installation
+#Installation for contributors
 
-A postgres image inside of Docker at port 8080
+Set-up your postgreSQL image and docker container
 
-npm install nodemon for Back-End
+pull repo from ...final repo destination
+
+inside of your ..path/aimassist/backend
+  npm install
+  npm install nodemon
+  check knexfile.js and configure for your postgreSQL database
+  npx knex migrate:latest
+  npm start
+
+inside of your path/aimassist/client
+  npm install
+  npm start
+
+
 
 #Usage
 
@@ -31,11 +41,7 @@ Once the form is filled out, simply click submit and you will see your new bulle
 ![Bullet Submitted](https://github.com/jltackett2/aimassist/blob/bullet-form/images/Bullet%20Added%20.png)
 
 
-You can also delete a bullet from your dashboard by clicking on the delete button next to the bullet you wish to delete:
-![See Delete Button](https://github.com/jltackett2/aimassist/blob/bullet-form/images/Bullet%20Added%20.png)
-
-
-Once you click the button, the bullet is removed:
+You can also delete a bullet from your dashboard by clicking on the delete button next to the bullet you wish to delete, which can be seen in the screen shot above. Once you click the button, the bullet is removed:
 ![Bullet Deleted](https://github.com/jltackett2/aimassist/blob/bullet-form/images/Dashbard.png)
 
 
