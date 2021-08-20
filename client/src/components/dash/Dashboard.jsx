@@ -12,8 +12,8 @@ const Dashboard = (props) => {
     const [show, toggleShow] = useState(false);
     const [curUser, setCurUser] = useState({
         user_id: 1,
-        first_name: "Joe",
-        last_name: "Schmo",
+        first_name: "Jordan",
+        last_name: "Tackett",
         email: "1234@4567.com",
         password: "password!",
         my_super: null,
@@ -35,11 +35,12 @@ const Dashboard = (props) => {
     const [dataRes, setDataRes] = useState('')
     //get subordinates for current user and set cur user subs state 
     
-    useEffect(()=> {
-        fetch(`http://localhost:3001/my-subordinates/${curUser.user_id}`)
-            .then(res => res.json())
-            .then(jsonData => setCurUserSubs(jsonData))
-    }, [curUser])
+    // FOLLOW ON FUNCTIONALITY TO LIST SUBORDINATES, NOT MVP
+    // useEffect(()=> {
+    //     fetch(`http://localhost:3001/my-subordinates/${curUser.user_id}`)
+    //         .then(res => res.json())
+    //         .then(jsonData => setCurUserSubs(jsonData))
+    // }, [curUser])
 
     //get list of bullets thats currently shown
     useEffect(() => {
@@ -51,8 +52,8 @@ const Dashboard = (props) => {
     const handleNewBullet = (event) => {
         event.preventDefault()
         const newBullet = {
-            user_id: 1,
-            date: newDate,
+            user_id: curUser.user_id,
+            date: '2021-08-20',
             action: newAction, 
             impact: newImpact, 
             result: newResult,
@@ -62,8 +63,26 @@ const Dashboard = (props) => {
         toggleShow(!show);
         
         axios.post('http://localhost:3001/new-bullet', newBullet)
-            .then(response => setDataRes(response.data.id));
-    }   
+            .then(response => {
+                console.log("Logging response on line 66 " + response);
+                console.log(response)
+                setDataRes(response)
+            }).catch(err => console.log('error: '+ err));
+    } 
+
+
+    const handleDelete = (event, bullet_id) => {
+        event.preventDefault()
+        console.log('This is the delete')
+        
+        
+        axios.delete(`http://localhost:3001/delete-bullet/${bullet_id}`)
+            .then(response => {
+                console.log("Logging response on line 80 " + response);
+                console.log(response)
+                setDataRes(response)
+            }).catch(err => console.log('error: '+ err));
+    }
    
 
 
@@ -73,7 +92,7 @@ const Dashboard = (props) => {
     <div className = "flex-holder">
             <div className = 'body-wrap'>
                 <div className = 'body-title'>
-                    Tracker
+                    {`Welcome To Aim Assist ${curUser.first_name}`}
                 </div>
             </div>
 
@@ -81,7 +100,7 @@ const Dashboard = (props) => {
                 <div className = 'content-holder'>
                     <div className="content-title-left">
                             <div className = 'content-title-main'>
-                                {`${userOfShownBullets.first_name} ${userOfShownBullets.last_name}'s bullets`}
+                                {`${userOfShownBullets.first_name} ${userOfShownBullets.last_name}'s Bullets`}
                             </div>
                             <div className = 'content-title-sub'>
                                 {shownBullets.length}
@@ -94,24 +113,23 @@ const Dashboard = (props) => {
                                     <div className = 'login-form'>
                                         <form>
                                         <div className="form-group">
-                                                        <input className="form-control" type="date" id="date"  value="2021-08-18" min="2018-01-01" max="2022-12-31" onChange={(event) => {setNewDate(event.target.value)}}/>
+                                                        <input className="form-control" type="text" id="date"  value="2021-08-20" min="2018-01-01" max="2022-12-31" onChange={(event) => {setNewDate(event.target.value)}}/>
                                                         <label for="date">Date:</label>
                                         </div>
                                         <div className="form-group">
-                                                        <input className="form-control" type="text" id="name" required minlength="1" maxlength="12" size="10" onChange={(event) => {setNewAction(event.target.value)}}/>
+                                                        <input className="form-control" type="text" id="name" required minlength="1"  size="10" onChange={(event) => {setNewAction(event.target.value)}}/>
                                                         <label for="name">Action:</label>
                                         </div>
                                         <div className="form-group">
-                                                        <input className="form-control" type="text" id="name" required minlength="1" maxlength="12" size="10" onChange={(event) => {setNewImpact(event.target.value)}}/>
+                                                        <input className="form-control" type="text" id="name" required minlength="1"  size="10" onChange={(event) => {setNewImpact(event.target.value)}}/>
                                                         <label for="name">Impact:</label>
                                         </div>
                                         <div className="form-group">
-                                                        <input className="form-control" type="text" id="name" required minlength="1" maxlength="12" size="10" onChange={(event)=>{setNewResult(event.target.value)}}/>
+                                                        <input className="form-control" type="text" id="name" required minlength="1"  size="10" onChange={(event)=>{setNewResult(event.target.value)}}/>
                                                         <label for="name">Results:</label>
                                         </div>
                                         <div class="form-btns">
                                             <Link to="/dashboard"><button className="login-btn" onClick={(event)=>{handleNewBullet(event)}}>Submit</button>
-                                            <button  className = 'add-bullet' >Cancel</button>
                                             </Link>
                                         </div>
                                         </form>
@@ -134,9 +152,8 @@ const Dashboard = (props) => {
                             <th>Action</th>
                             <th>Impact</th>
                             <th>Results</th>
-                            <th>Feedback</th>
                         </tr>
-                        <Bullets props={shownBullets}/>
+                        <Bullets handleDelete={handleDelete} props={shownBullets}/>
                     </table>
                 </div>  
             
