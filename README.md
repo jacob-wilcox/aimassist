@@ -11,7 +11,9 @@ No installation needed, just go to https://aimassist.org and create an account t
 #Usage
 Aim Assist is simple and user friendly. Simply login and you will be taken to your dashboard:
 
+![Image of Dashboard](http://url/to/img.png)
 
+From your 
 
 #Team Members
 
