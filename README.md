@@ -19,7 +19,7 @@ No installation needed, just go to https://aimassist.org and create an account t
 #Usage
 
 Aim Assist is simple and user friendly. Login to be taken to your dashboard:
-<img src="images/Dashboard.png" alt="Dashboard">
+<img src="./images/Dashboard.png" alt="Dashboard">
 ^ wrong synx
 ![](https://github.com/link to the pic.png)
 
