@@ -2,9 +2,19 @@ const express = require('express');
 const app = express();
 const {development} = require('./knexfile.js');
 const knex = require('knex')(development);
-const bodyParser = require("body-parser");
+var cors = require('cors')
+const morgan = require('morgan')
 
-app.use(bodyParser.json());
+app.use(express.json());
+app.use(morgan('dev'));
+
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  next();
+});
+
+app.use(cors())
+
 
 //get all users
 app.get('/all_users', (req, res) => {
@@ -117,11 +127,14 @@ app.post('/new-user', (req, res) =>  {
 
 //post new bullet
 app.post('/new-bullet', (req, res) =>  {
+  console.log("executing new bullet")
   let body = req.body
+  console.log("body: ")
+  console.log(body);
   knex('bullets')
     .insert(body)
     .then(() => {
-      return res.status(200).send(`You added ${body.action}`)
+      return res.status(200).send(body)
     })
     .catch((err) => res.send(err))
 });

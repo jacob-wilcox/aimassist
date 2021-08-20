@@ -4,6 +4,9 @@ import '../navigation/nav.css';
 import { Link, useHistory } from 'react-router-dom';
 
 function Login() {
+    // make a call for email and password
+    //returns profile with id
+
   return (
     <div className="Login">
         <body>
@@ -31,6 +34,7 @@ function Login() {
                                 <label  onclick="myFunction()" type="click" for="password">Password:</label>
                             </div>    
                             <div className="checkbox-wrapper">
+                                {/* pass profile to dashboard */}
                                 <Link to="/dashboard"><button className="login-btn">Enter</button></Link>
                                 <div className="checkbox">
                                     <input className="custom-checkbox" type="checkbox" id="check-2" />
