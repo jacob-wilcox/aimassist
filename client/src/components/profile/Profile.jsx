@@ -13,16 +13,17 @@ function Profile(props) {
 
 const [curUserSubs, setCurUserSubs] = useState([])
 
-useEffect(()=> {
-    fetch(`http://localhost:3001/my-subordinates/1`)
-        .then(res => res.json())
-        .then(jsonData => setCurUserSubs(jsonData))
-}, [curUserSubs])
+// FOLLOW ON TO MVP
+// useEffect(()=> {
+//     fetch(`http://localhost:3001/my-subordinates/1`)
+//         .then(res => res.json())
+//         .then(jsonData => setCurUserSubs(jsonData))
+// }, [curUserSubs])
 
 
 const [user, setUser] = useState([])
 useEffect(() => {
-    axios.get('http://localhost:3001/user/2')
+    axios.get('http://localhost:3001/user/1')
     .then((response) => {
         setUser(response.data[0]);
     });

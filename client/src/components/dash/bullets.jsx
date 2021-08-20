@@ -9,13 +9,12 @@ const Bullets = (props) => {
     <>
       {bullets.map((bullet, index)=>{
         return (
-          <tr className="task" data-id={`${index}`}>
+          <tr className="task" data-id={`${bullet.bullet_id}`}>
             <td>{bullet.date}</td>
             <td>{bullet.action}</td>
             <td>{bullet.impact}</td>
             <td>{bullet.result}</td>
-            <td>{bullet.feedback}</td>
-            <td><a href="#">Delete</a></td>
+            <td onClick={(event) => {props.handleDelete(event, bullet.bullet_id)}}><a href="#">Delete</a></td>
           </tr>
         )
       })}

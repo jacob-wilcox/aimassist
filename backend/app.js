@@ -127,7 +127,10 @@ app.post('/new-user', (req, res) =>  {
 
 //post new bullet
 app.post('/new-bullet', (req, res) =>  {
+  console.log("executing new bullet")
   let body = req.body
+  console.log("body: ")
+  console.log(body);
   knex('bullets')
     .insert(body)
     .then(() => {
