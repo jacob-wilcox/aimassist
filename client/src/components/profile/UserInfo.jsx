@@ -14,46 +14,62 @@ const UserInfo = (props) => {
     return (is_super ? "Supervisor" : "Airman");
   }
 
-  // const [updatedAt, setUpdatedAt] = useState([])
+  const [updatedAt, setUpdatedAt] = useState([])
+  const [name, setName] = useState('');
+  const [lname, setLName] = useState('');
+  const [mail, setMail] = useState('');
+  const [pswd, setPswd] = useState('');
 
-  //   useEffect(() => {
-  //     const userUPD = { 
-  //       first_name: 'Michelle',
-  //       last_name: 'Star',
-  //       email: 'email',
-  //       password: 'pass',
-  //    };
+  
+  
 
-  //     axios.put('http://localhost:3001/edit/user/2', userUPD)
-  //     .then(response => setUpdatedAt(response.data.updatedAt));
-  // }, []);
+  const handleNewUser = (event) => {
+    console.log('handle event worked')
+    event.preventDefault()
+   
+      const userUpdate = {
+        first_name: name,
+        last_name: lname,
+        email: email,
+        password: pswd
+      };
 
-// const handleChange = () => {
-//   console.log ('deddddd')
-// }
-
+      axios.put('http://localhost:3001/edit/user/2', userUpdate)
+          .then(response => setUpdatedAt(response.data.updatedAt));
+  }
+  
   return (
   
                     <div className = 'login-form'>
+                      <form>
                         <div className="form-group">
                                         <input value={id} className="form-control" type="text" id="id" />
                                         <label for="id">ID / Referal code:</label>
                         </div>
                         
                         <div className="form-group">
-                                        <input type="text" defaultValue={first_name} className="form-control" type="text" id="first_name" />
-                                        <label for="first_name">First Name:</label>
+                                        <input
+                                        type="text" defaultValue={first_name} 
+                                        onChange={(event) => {setName(event.target.value)}} 
+                                        className="form-control" type="text" id="first_name" />
+                                        <label for="first_name">First name</label>
                         </div>
                         <div className="form-group">
-                                        <input defaultValue={last_name} className="form-control" type="text" id="last_name"  />
+                                        <input defaultValue={last_name} 
+                                         onChange={(event) => {setLName(event.target.value)}} 
+                                        className="form-control" type="text" id="last_name"  />
                                         <label for="last_name">Last Name:</label>
                         </div>
                         <div className="form-group">
-                                        <input defaultValue={email} className="form-control" type="text" id="email"  />
+                                        <input defaultValue={email} 
+                                         onChange={(event) => {setMail(event.target.value)}} 
+                                        className="form-control" type="text" id="email"  />
                                         <label for="email">Email:</label>
                         </div>
                         <div className="form-group">
-                                        <input defaultValue={password} className="form-control" type="text" id="name"  />
+                                        <input defaultValue={password} 
+                                         onChange={(event) => {setPswd(event.target.value)}} 
+                                        className="form-control" type="text" id="name"  />
                                         <label for="password">Password:</label>
                         </div>
                         <div className="form-group">
@@ -62,7 +78,8 @@ const UserInfo = (props) => {
                                            <option value="{getRole(!is_super)}">{getRole(!is_super)}</option>
                                         </select> 
                         </div>
-                        <Link to="/dashboard"><button className="login-btn">Submit update</button></Link>
+                        <Link to="/dashboard"><button onClick={(event) => {handleNewUser(event)}} className="login-btn">Submit update</button></Link>
+                        </form>
                     </div>
   );
 }

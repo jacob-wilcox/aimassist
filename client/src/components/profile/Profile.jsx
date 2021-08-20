@@ -22,7 +22,7 @@ useEffect(()=> {
 
 const [user, setUser] = useState([])
 useEffect(() => {
-    axios.get('http://localhost:3001/user/1')
+    axios.get('http://localhost:3001/user/2')
     .then((response) => {
         setUser(response.data[0]);
     });

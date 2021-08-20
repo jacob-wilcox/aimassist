@@ -4,20 +4,12 @@ import React, {useEffect, useState}  from "react";
 import './Dashboard.css';
 import Bar from '../bar/bar.jsx';
 import Bullets from './bullets';
+import axios from 'axios';
 
-// function myFunction() {
-//     var x = document.getElementById("myDIV");
-//     if (x.style.display === "none") {
-//       x.style.display = "block";
-//     } else {
-//       x.style.display = "none";
-//     }
-//   }
 
 //user profile is passed as a prop
 const Dashboard = (props) => { 
-    console.log('this is props', props)
-    const [show, toggleShow] = useState(true);
+    const [show, toggleShow] = useState(false);
     const [curUser, setCurUser] = useState({
         user_id: 1,
         first_name: "Joe",
@@ -30,11 +22,19 @@ const Dashboard = (props) => {
     const [curUserSubs, setCurUserSubs] = useState([])
     const [userOfShownBullets, setUserOfShownBullets] = useState(curUser)
     const [shownBullets, setShownBullets] = useState([])
-    //fetch call for all sub
-    //fetch call for all bullets && be able to change user id to collect users bullets
-    // a function that can post a new bullet
-   
+    
+
+
+    //FOR ADDING A BULLET
+    const [newDate, setNewDate] = useState('')
+    const [newAction, setNewAction] = useState('')
+    const [newImpact, setNewImpact] = useState('')
+    const [newResult, setNewResult] = useState('')
+    const [updateBullets, setUpdateBullets] = useState({})
+    const [newFeedBack, setNewFeedBack] = useState('this wont be used')
+    const [dataRes, setDataRes] = useState('')
     //get subordinates for current user and set cur user subs state 
+    
     useEffect(()=> {
         fetch(`http://localhost:3001/my-subordinates/${curUser.user_id}`)
             .then(res => res.json())
@@ -46,7 +46,26 @@ const Dashboard = (props) => {
         fetch(`http://localhost:3001/bullets/${userOfShownBullets.user_id}`)
         .then(res => res.json())
         .then(jsonData => setShownBullets(jsonData))
-    }, [userOfShownBullets, curUser])
+    }, [userOfShownBullets, curUser, dataRes])
+
+    const handleNewBullet = (event) => {
+        event.preventDefault()
+        const newBullet = {
+            user_id: 1,
+            date: newDate,
+            action: newAction, 
+            impact: newImpact, 
+            result: newResult,
+            feedback: newFeedBack
+        }
+        console.log('This is the new bullets', newBullet)
+        toggleShow(!show);
+        
+        axios.post('http://localhost:3001/new-bullet', newBullet)
+            .then(response => setDataRes(response.data.id));
+    }   
+   
+
 
   return (
    <div className = 'dashboard'>
@@ -73,26 +92,29 @@ const Dashboard = (props) => {
                             {show &&  
                                 <div  className = 'form-form'>
                                     <div className = 'login-form'>
+                                        <form>
                                         <div className="form-group">
-                                                        <input className="form-control" type="date" id="date"  value="2021-08-18" min="2018-01-01" max="2022-12-31" />
+                                                        <input className="form-control" type="date" id="date"  value="2021-08-18" min="2018-01-01" max="2022-12-31" onChange={(event) => {setNewDate(event.target.value)}}/>
                                                         <label for="date">Date:</label>
                                         </div>
                                         <div className="form-group">
-                                                        <input className="form-control" type="text" id="name" required minlength="1" maxlength="12" size="10" />
+                                                        <input className="form-control" type="text" id="name" required minlength="1" maxlength="12" size="10" onChange={(event) => {setNewAction(event.target.value)}}/>
                                                         <label for="name">Action:</label>
                                         </div>
                                         <div className="form-group">
-                                                        <input className="form-control" type="text" id="name" required minlength="1" maxlength="12" size="10" />
+                                                        <input className="form-control" type="text" id="name" required minlength="1" maxlength="12" size="10" onChange={(event) => {setNewImpact(event.target.value)}}/>
                                                         <label for="name">Impact:</label>
                                         </div>
                                         <div className="form-group">
-                                                        <input className="form-control" type="text" id="name" required minlength="1" maxlength="12" size="10" />
+                                                        <input className="form-control" type="text" id="name" required minlength="1" maxlength="12" size="10" onChange={(event)=>{setNewResult(event.target.value)}}/>
                                                         <label for="name">Results:</label>
                                         </div>
                                         <div class="form-btns">
-                                            <Link to="/dashboard"><button className="login-btn">Submit</button></Link>
-                                            <button  className = 'add-bullet' onClick={() => toggleShow(!show)}>Cancel</button>
+                                            <Link to="/dashboard"><button className="login-btn" onClick={(event)=>{handleNewBullet(event)}}>Submit</button>
+                                            <button  className = 'add-bullet' >Cancel</button>
+                                            </Link>
                                         </div>
+                                        </form>
                                     </div>
                                 </div>
                                 
