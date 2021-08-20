@@ -21,7 +21,13 @@ npm install nodemon for Back-End
 #Usage
 
 Aim Assist is simple and user friendly. Login to be taken to your dashboard:
+<<<<<<< HEAD
 ![Dashboard](https://github.com/jltackett2/aimassist/blob/bullet-form/images/Dashbard.png)
+=======
+<img src="./images/Dashboard.png" alt="Dashboard">
+^ wrong synx
+![](https://github.com/link to the pic.png)
+>>>>>>> 1b45f70298ccbd7ece548de15b13ce8a67177571
 
 From your dashboard, you can see you previously submited bullets. You can also add new a new bullet by clicking on the add bullet button. This will open the add bullet form:
 ![Add Bullet](https://github.com/jltackett2/aimassist/blob/bullet-form/images/Add%20Bullet.png)
